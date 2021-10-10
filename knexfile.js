@@ -1,11 +1,11 @@
 // Update with your config settings.
 const {Pool} = require('pg')
-const { db } = require('./.env')
+require('dotenv/config')
 
 module.exports = {
   
     client:'postgresql',
-    connection: db,
+    connection: process.env.db,
 	pool: {
 		min: 2,
 		max: 10
