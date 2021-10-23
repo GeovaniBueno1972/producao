@@ -45,7 +45,7 @@ module.exports = app => {
         app.db('mat_ped')
             .select('id', 'pedido_numero', 'material_id', 'quantidade')
             .where({ pedido_numero: req.params.id})
-            .first()
+            //.first()
             .then(material_pedido => res.json (material_pedido))
             .catch(err => res.status(500).send(err))
             //console.log(this.material_pedido)
