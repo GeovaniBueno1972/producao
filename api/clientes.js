@@ -31,7 +31,7 @@ module.exports = app => {
     const get = (req, res) => {
         app.db( 'clientes')
             .select('id', 'name', 'fone', 'bairro')
-            .orderBy('name')
+            .orderBy('name', 'asc')
             .then (clientes => res.json (clientes))
             .catch(err => res.status(500).send(err))
     }
