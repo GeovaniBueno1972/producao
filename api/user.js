@@ -57,6 +57,14 @@ module.exports = app => {
             .catch(err => res.status(500).send(err))
     }
 
+    const getOperador = (req, res) => {
+        app.db('users')
+            .select('id', 'name', 'funcao')
+            .where({funcao: 'operador'})
+            .then(users => res.json(users))
+            .catch(err => res.status(500).send(err))
+    }
+
     const getById = (req, res) => {
         app.db('users')
             .select('id', 'name', 'funcao')
@@ -79,5 +87,5 @@ module.exports = app => {
             res.status(400).send(msg)
         }
     }
-    return { save, get, getById, remove }
+    return { save, get, getOperador, getById, remove }
 }

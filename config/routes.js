@@ -8,6 +8,11 @@ module.exports = app => {
         .post(app.api.user.save)
         .get(app.api.user.get)
 
+    app.route('/operador')
+        .all(app.config.passport.authenticate())
+        .post(app.api.user.save)
+        .get(app.api.user.getOperador)
+
     app.route('/users/:id')
         .all(app.config.passport.authenticate())
         .put(app.api.user.save)
