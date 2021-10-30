@@ -38,10 +38,14 @@ module.exports = app => {
 
     const get = (req, res) => {
         app.db('producao')
-            .select('id', 'data_ini_producao', 'pedido_numero', 'user_id', 'data_conclusao')
+            .select('p.id', 'p.data_ini_producao', 'p.pedido_numero', 'u.name as operador', 'p.data_conclusao')
+            .table('producao as p')
+            .join('users as u' , 'p.user_id', 'u.id')
             .then(producao => res.json(producao))
             .catch(err => res.status(500).send(err))
     }
+
+    
 
     const getByNumero = (req, res) => {
         app.db('producao')
