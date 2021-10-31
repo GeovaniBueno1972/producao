@@ -49,7 +49,9 @@ module.exports = app => {
 
     const getByNumero = (req, res) => {
         app.db('producao')
-            .select('id', 'data_ini_producao', 'pedido_numero', 'user_id', 'data_conclusao')
+            .select('p.id', 'p.data_ini_producao', 'p.pedido_numero', 'u.name as operador', 'p.data_conclusao')
+            .table('producao as p')
+            .join('users as u' , 'p.user_id', 'u.id')
             .where({ pedido_numero: req.params.id})
             .first()
             .then(producao => res.json (producao))
