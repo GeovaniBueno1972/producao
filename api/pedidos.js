@@ -1,3 +1,5 @@
+const Knex = require("knex")
+
 module.exports = app => {
     const { existsOrError, notExistsOrError } = app.api.validation
 
@@ -66,6 +68,7 @@ module.exports = app => {
         app.db('pedidos')
             .where({ numero: req.params.numero})
             .update({estado: 'Concluido'}, ['numero', 'estado'])
+            .update({data_conclusao: 'now'}), ['numero', 'data_conclusao']
             .then(_ => res.status(204).send())
             .catch(err => res.status(500).send(err))
     }
