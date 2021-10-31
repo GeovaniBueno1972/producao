@@ -58,6 +58,8 @@ module.exports = app => {
         app.db('pedidos')
             .where({ numero: req.params.numero})
             .update({estado: 'Producao'}, ['numero', 'estado'])
+            .then(_ => res.status(204).send())
+            .catch(err => res.status(500).send(err))
     }
 
     const getByNumero = (req, res) => {
