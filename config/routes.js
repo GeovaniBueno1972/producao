@@ -69,8 +69,15 @@ module.exports = app => {
     app.route('/pedidos_producao/:numero')
         .all(app.config.passport.authenticate())
         .put(app.api.pedidos.paraProducao)
-        
-        
+    
+    app.route('/pedidos_impedimento/:numero')
+        .all(app.config.passport.authenticate())
+        .put(app.api.pedidos.paraImpedimento)
+    
+    app.route('/pedidos_concluido/:numero')
+        .all(app.config.passport.authenticate())
+        .put(app.api.pedidos.paraImpedimento)
+
     app.route('/pedidos_aguardando')
         .all(app.config.passport.authenticate())
         .put(app.api.pedidos.save)

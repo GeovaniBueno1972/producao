@@ -62,6 +62,22 @@ module.exports = app => {
             .catch(err => res.status(500).send(err))
     }
 
+    const paraConcluido = (req, res) => {
+        app.db('pedidos')
+            .where({ numero: req.params.numero})
+            .update({estado: 'Concluido'}, ['numero', 'estado'])
+            .then(_ => res.status(204).send())
+            .catch(err => res.status(500).send(err))
+    }
+
+    const paraImpedimento = (req, res) => {
+        app.db('pedidos')
+            .where({ numero: req.params.numero})
+            .update({estado: 'Impedimento'}, ['numero', 'estado'])
+            .then(_ => res.status(204).send())
+            .catch(err => res.status(500).send(err))
+    }
+
     const getByNumero = (req, res) => {
         app.db.select([ 'p.numero', 'p.data_lancamento', 
         'p.data_entrega', 'u.name as usuario', 'c.name as cliente', 'p.estado', 'c.bairro'])
@@ -88,5 +104,6 @@ module.exports = app => {
         }
     }
 
-    return { save, get, getAguardando, getByNumero, paraProducao, remove }
+    return { save, get, getAguardando, getByNumero, 
+        paraProducao, paraImpedimento, paraConcluido, remove }
 }
