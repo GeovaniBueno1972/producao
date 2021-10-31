@@ -76,7 +76,7 @@ module.exports = app => {
     
     app.route('/pedidos_concluido/:numero')
         .all(app.config.passport.authenticate())
-        .put(app.api.pedidos.paraImpedimento)
+        .put(app.api.pedidos.paraConcluido)
 
     app.route('/pedidos_aguardando')
         .all(app.config.passport.authenticate())
