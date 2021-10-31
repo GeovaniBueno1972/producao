@@ -97,8 +97,8 @@ module.exports = app => {
         .get(app.api.producao.getByNumero)
         .delete(app.api.producao.remove)
 
-    app.route('/concluido/:id')
-        .all(app.config.passport.authenticate())
-        .put(app.api.producao.concluido)
+    // app.route('/concluido/:id')
+    //     .all(app.config.passport.authenticate())
+    //     .put(app.api.producao.concluido)
         
 }
