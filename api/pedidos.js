@@ -54,6 +54,11 @@ module.exports = app => {
             .catch(err => res.status(500).send(err))
             
     }
+    const paraProducao = (req, res) => {
+        app.db('pedidos')
+            .where({ numero: req.params.numero})
+            .update({estado: 'Producao'}, ['numero', 'estado'])
+    }
 
     const getByNumero = (req, res) => {
         app.db.select([ 'p.numero', 'p.data_lancamento', 
@@ -81,5 +86,5 @@ module.exports = app => {
         }
     }
 
-    return { save, get, getAguardando, getByNumero, remove }
+    return { save, get, getAguardando, getByNumero, paraProducao, remove }
 }

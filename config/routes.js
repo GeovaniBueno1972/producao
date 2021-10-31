@@ -65,6 +65,11 @@ module.exports = app => {
         .put(app.api.pedidos.save)
         .get(app.api.pedidos.getByNumero)
         .delete(app.api.pedidos.remove)
+
+    app.route('/pedidos_producao/:numero')
+        .all(app.config.passport.authenticate())
+        .put(app.api.pedidos.paraProducao)
+        
         
     app.route('/pedidos_aguardando')
         .all(app.config.passport.authenticate())
