@@ -76,7 +76,7 @@ module.exports = app => {
     
     app.route('/pedidos_concluido/:numero')
         .all(app.config.passport.authenticate())
-        .put(app.api.pedidos.paraConcluido)
+        .put(app.api.pedidos.paraConcluidopedidos)
 
     app.route('/pedidos_aguardando')
         .all(app.config.passport.authenticate())
@@ -96,4 +96,9 @@ module.exports = app => {
         .put(app.api.producao.save)
         .get(app.api.producao.getByNumero)
         .delete(app.api.producao.remove)
+
+    app.route('/concluido/:id')
+        .all(app.config.passport.authenticate())
+        .put(app.api.producao.concluido)
+        
 }

@@ -69,6 +69,14 @@ module.exports = app => {
             //console.log(this.material_pedido)
     }
 
+    const concluido = (req, res) => {
+        app.db('producao')
+            .where({ pedido_numero: req.params.numero})
+            .update({data_conclusao: 'now'}, ['id', 'data_conclusao'])
+            .then(_ => res.status(204).send())
+            .catch(err => res.status(500).send(err))
+    }
+
     const remove = async (req, res) => {
         try {
             const rowsUpdated = await app.db('producao')
@@ -83,5 +91,5 @@ module.exports = app => {
         }
     }
 
-    return { save, get, getById, getByNumero, remove }
+    return { save, get, getById, getByNumero, concluido, remove }
 }
