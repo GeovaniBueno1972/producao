@@ -1,14 +1,13 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "nodemon",
     "production": "node index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Geovani Bueno",
   "license": "ISC",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
@@ -29,5 +28,6 @@
   },
   "devDependencies": {
     "nodemon": "1.18.4"
-  }
+  },
+  "description": ""
 }
