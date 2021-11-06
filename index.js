@@ -6,7 +6,6 @@ const cors = require('cors')
 app.db = db
 
 app.use((req, res, next) => {
-    app.use(cors())
     res.header("Access-Control-Allow-Origin", "*")
     res.header("Access-Control-Allow-Header",
     'Origin, X-Requested-With, Content-Type, Accept, Authorization')
@@ -14,6 +13,7 @@ app.use((req, res, next) => {
         res.header("Access-Control-Allow-Methods", 'PUT, POST, PATCH, DELETE, GET ')
         return res.status(200).send({})
     }
+    app.use(cors())
     next()
 })
 
