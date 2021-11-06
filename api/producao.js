@@ -9,14 +9,7 @@ module.exports = app => {
 
         try{
             existsOrError(producao.pedido_numero, 'Salve o pedido para cadastrar materiais')
-            //existsOrError(materiail_pedido.material_id, 'Material não informado')
-
-            //  const materialFromDB = await app.db('mat_ped')
-            //     .where({ material_id: material_pedido.material_id}).first()
             
-            // if(!materiail_pedido.material_id){
-            //     notExistsOrError(materialFromDB, 'Material já cadastrado')
-            // }
         } catch (msg){
             return res.status(400).send(msg)
         }
@@ -70,9 +63,9 @@ module.exports = app => {
     }
 
     const concluido = (req, res) => {
-        app.db('producao')
-            .where({ pedido_numero: req.params.numero})
-            .update({data_conclusao: date('now')}, ['id', 'data_conclusao'])
+         app.db('producao')
+            .where({ pedido_numero: req.params.id})
+            .update({data_conclusao: 'now'}, ['id', 'data_conclusao'])
             .then(_ => res.status(204).send())
             .catch(err => res.status(500).send(err))
     }
