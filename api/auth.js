@@ -3,7 +3,6 @@ const jwt = require('jwt-simple')
 const bcrypt = require('bcrypt-nodejs')
 const cors = require('cors')
 
-app.use(cors())
 
 module.exports = app => {
     const signin = async (req, res) => {
