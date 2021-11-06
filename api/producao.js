@@ -72,7 +72,7 @@ module.exports = app => {
     const concluido = (req, res) => {
         app.db('producao')
             .where({ pedido_numero: req.params.numero})
-            .update({data_conclusao: 'now'}, ['id', 'data_conclusao'])
+            .update({data_conclusao: date('now')}, ['id', 'data_conclusao'])
             .then(_ => res.status(204).send())
             .catch(err => res.status(500).send(err))
     }
