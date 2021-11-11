@@ -44,6 +44,19 @@ module.exports = app => {
             
     }
 
+    const getData = (req, res) => {
+        app.db.select([ 'p.numero', 'p.data_lancamento', 
+        'p.data_entrega', 'u.name as usuario', 'c.name as cliente', 'p.estado', 'c.bairro'])
+            .table('pedidos as p')
+            .join('users as u', 'p.user_id', 'u.id')
+            .join('clientes as c', 'p.cliente_id', 'c.id')
+            .whereBetween( 'p.data_entrega', [req.body.data_ini, req.body.data_fin])
+            .orderBy(['p.data_entrega', {column: 'data_lancamento', order: 'asc'}])
+            .then (pedidos => res.json (pedidos))
+            .catch(err => res.status(500).send(err))
+            
+    }
+
     const getAguardando = (req, res) => {
         app.db.select([ 'p.numero', 'p.data_lancamento', 
         'p.data_entrega', 'u.name as usuario', 'c.name as cliente', 'p.estado', 'c.bairro'])
@@ -106,6 +119,6 @@ module.exports = app => {
         }
     }
 
-    return { save, get, getAguardando, getByNumero, 
+    return { save, get, getAguardando, getByNumero, getData, 
         paraProducao, paraImpedimento, paraConcluido, remove }
 }

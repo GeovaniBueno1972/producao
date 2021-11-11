@@ -100,5 +100,10 @@ module.exports = app => {
     app.route('/concluido/:id')
         .all(app.config.passport.authenticate())
         .put(app.api.producao.concluido)
+
+    app.route('/pedidos_pesquisa')
+        .all(app.config.passport.authenticate())
+        .post(app.api.pedidos.getData)
+        
         
 }
