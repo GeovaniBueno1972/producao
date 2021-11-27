@@ -107,5 +107,9 @@ module.exports = app => {
         
     app.route('/PedidoCliente')
         .all(app.config.passport.authenticate())
-        .post(app.api.pedidos.getCliente)    
+        .post(app.api.pedidos.getCliente)  
+        
+    app.route('/PedidoNumero')
+        .all(app.config.passport.authenticate())
+        .post(app.api.pedidos.getNumero)
 }

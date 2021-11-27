@@ -85,6 +85,19 @@ module.exports = app => {
             
     }
 
+    const getNumero = (req, res) => {
+        app.db.select([ 'p.numero', 'p.data_lancamento', 
+        'p.data_entrega', 'u.name as usuario', 'c.name as cliente', 'p.estado', 'c.bairro'])
+            .table('pedidos as p')
+            .join('users as u', 'p.user_id', 'u.id')
+            .join('clientes as c', 'p.cliente_id', 'c.id')
+            .orderBy(['p.data_entrega', {column: 'data_lancamento', order: 'asc'}])
+            .where('p.numero', req.body.numero)
+            .then (pedidos => res.json (pedidos))
+            .catch(err => res.status(500).send(err))
+            
+    }
+
     const paraProducao = (req, res) => {
         app.db('pedidos')
             .where({ numero: req.params.numero})
@@ -136,5 +149,6 @@ module.exports = app => {
     }
 
     return { save, get, getAguardando, getByNumero, getData, 
-        paraProducao, paraImpedimento, paraConcluido, remove, getCliente }
+        paraProducao, paraImpedimento, paraConcluido, remove,
+        getCliente, getNumero }
 }
