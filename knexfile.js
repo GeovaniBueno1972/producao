@@ -5,7 +5,7 @@ module.exports = {
   
     client:'postgresql',
     connection: {
-      connectionString: 'postgres://mocutjaxmpefri:7a00ac34c66a83f0ed6490c376e91bb4fc5d12c0044d5512e3d12ac6f3f0fa4e@ec2-44-194-201-94.compute-1.amazonaws.com:5432/dd3gkc07tfoolb',
+      connectionString: 'postgres://enlggwngtipbtr:adc51e4b93ccc89385901ee39117d5dc02f49269a4b93e137e5be33b97574aa9@ec2-34-228-100-83.compute-1.amazonaws.com:5432/da79pdnm8df5lr',
       ssl: {
         rejectUnauthorized: false
       },
