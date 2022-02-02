@@ -24,7 +24,7 @@ module.exports = app => {
         .post(app.api.materiais.save)
         .get(app.api.materiais.get)
 
-    app.route('/materiais/:id')
+    app.route('/materiais/:codigo')
         .all(app.config.passport.authenticate())
         .put(app.api.materiais.save)
         .get(app.api.materiais.getById)
