@@ -3,16 +3,16 @@ module.exports = app => {
 
     const save = async (req, res) => {
         const materiais = {...req.body}
-        if(req.params.id) materiais.id = req.params.id
+        //if(req.params.id) materiais.id = req.params.id
 
         try{
              existsOrError(materiais.codigo, 'Código não informado')
-             existsOrError(materiais.name, 'Nome do material não informado')
+             existsOrError(materiais.nome, 'Nome do material não informado')
 
              const materialFromDB = await app.db('materiais')
                 .where({ codigo: materiais.codigo}).first()
             
-            if(!materiais.id){
+            if(!materiais.codigo){
                 notExistsOrError(materialFromDB, 'Material já cadastrado')
             }
         } catch (msg){
@@ -35,14 +35,14 @@ module.exports = app => {
 
     const get = (req, res) => {
         app.db('materiais')
-            .select('id', 'codigo', 'name', 'unidade')
+            .select( 'codigo', 'nome', 'unidade')
             .then(materiais => res.json(materiais))
             .catch(err => res.status(500).send(err))
     }
 
     const getById = (req, res) => {
         app.db('materiais')
-            .select('id', 'codigo', 'name', 'unidade')
+            .select( 'codigo', 'nome', 'unidade')
             .where({ id: req.params.id})
             .first()
             .then(materiais => res.json(materiais))
@@ -53,7 +53,7 @@ module.exports = app => {
         try {
             const rowsUpdated = await app.db('materiais')
                 .delete()
-                .where({ id: req.params.id })
+                .where({ codigo: req.params.codigo })
             existsOrError(rowsUpdated, 'Material não foi encontrado.')
 
             res.status(204).send()
