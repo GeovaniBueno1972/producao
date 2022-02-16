@@ -61,7 +61,7 @@ module.exports = app => {
     const getOperador = (req, res) => {
         app.db('users')
             .select('id', 'name', 'funcao')
-            .where('funcao', 'producao')
+            .where('funcao', 'Producao')
             .then(users => res.json(users))
             .catch(err => res.status(500).send(err))
     }
