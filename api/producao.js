@@ -66,7 +66,7 @@ module.exports = app => {
          app.db('producao')
             .where({ pedido_numero: req.params.id})
             .update({data_conclusao: 'now'}, ['id', 'data_conclusao'])
-            .then(_ => res.status(204).send())
+            .then(pedido => res.json(pedido))
             .catch(err => res.status(500).send(err))
     }
 

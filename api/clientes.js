@@ -35,7 +35,7 @@ module.exports = app => {
 
     const get = (req, res) => {
         app.db( 'clientes')
-            .select('id', 'name', 'fone', 'bairro')
+            .select('id', 'name', 'fone', 'bairro', 'cidade')
             .orderBy('name', 'asc')
             .then (clientes => res.json (clientes))
             .catch(err => res.status(500).send(err))
@@ -43,7 +43,7 @@ module.exports = app => {
 
     const getById = (req, res) => {
         app.db( 'clientes')
-            .select('id', 'name', 'fone', 'bairro')
+            .select('id', 'name', 'fone', 'bairro', 'cidade')
             .where({ id: req.params.id})
             .first()
             .then (clientes => res.json (clientes))
