@@ -51,16 +51,18 @@ module.exports = app => {
     }
 
     const get = (req, res) => {
-        app.db('users')
-            .select('id', 'name', 'funcao')
+        app.db.select(['u.id', 'u.name', 'f.nome as funcao'])
+            .table('users as u')
+            .join('funcao as f', 'u.id_funcao', 'f.id')
             .then(users => res.json(users))
             .catch(err => res.status(500).send(err))
     }
 
     const getOperador = (req, res) => {
-        app.db('users')
-            .select('id', 'name', 'funcao')
-            .where('funcao', 'producao')
+        app.db.select(['u.id', 'u.name', 'f.nome as funcao'])
+            .table('users as u')
+            .join('funcao as f', 'u.id_funcao', 'f.id')
+            .where('id_funcao', '2')
             .then(users => res.json(users))
             .catch(err => res.status(500).send(err))
     }

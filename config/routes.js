@@ -4,7 +4,7 @@ module.exports = app => {
     app.post('/validateToken', app.api.auth.validateToken)
 
     app.route('/users')
-        .all(app.config.passport.authenticate())
+        //.all(app.config.passport.authenticate())
         .post(app.api.user.save)
         .get(app.api.user.get)
 
@@ -24,7 +24,7 @@ module.exports = app => {
         .post(app.api.materiais.save)
         .get(app.api.materiais.get)
 
-    app.route('/materiais/:id')
+    app.route('/materiais/:codigo')
         .all(app.config.passport.authenticate())
         .put(app.api.materiais.save)
         .get(app.api.materiais.getById)
